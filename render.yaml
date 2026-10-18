@@ -1,0 +1,27 @@
+# Alternative deployment: Render free web service (see README "Hosting alternatives").
+# Note: Render free services spin down after 15 idle minutes and take ~1 minute to
+# wake, which breaks mid-call tool calls unless an external pinger (UptimeRobot,
+# cron-job.org) hits /healthz every 5 minutes. Use /healthz (no database access),
+# never /health: pinging the database every 5 minutes keeps Neon's compute awake
+# 24/7 and exhausts the free plan's monthly compute allowance.
+# Vercel + Neon is the primary target.
+services:
+  - type: web
+    name: voice-patient-registration
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.9
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        sync: false   # paste the Neon pooled connection string (Render's own free Postgres expires after 30 days)
+      - key: VAPI_WEBHOOK_SECRET
+        sync: false
+      - key: SEED_DEMO_DATA
+        value: "true"

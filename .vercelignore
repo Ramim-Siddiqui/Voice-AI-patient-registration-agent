@@ -1,0 +1,9 @@
+.venv
+tests
+data
+__pycache__
+*.pyc
+.pytest_cache
+.env
+.vapi-state.json
+render.yaml

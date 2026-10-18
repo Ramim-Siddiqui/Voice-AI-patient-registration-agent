@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Local data & secrets
+data/*.db
+data/*.db-journal
+.env
+.env.*
+!.env.example
+.vapi-state.json
+logs/
+
+# Vercel
+.vercel/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+.vercel
+.env*

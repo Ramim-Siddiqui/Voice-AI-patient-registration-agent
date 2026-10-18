@@ -1,0 +1,19 @@
+# Web framework + ASGI server
+fastapi==0.143.3
+uvicorn[standard]==0.54.0
+
+# Validation / settings
+pydantic==2.14.1
+pydantic-settings==2.16.0
+email-validator==2.3.0
+python-dotenv==1.2.4
+
+# Database (SQLite locally, PostgreSQL/Neon in the cloud)
+SQLAlchemy==2.1.5
+psycopg[binary]==3.3.6
+
+# HTTP client (Vapi provisioning script + tests)
+httpx==0.28.1
+
+# Tests
+pytest==9.1.1
